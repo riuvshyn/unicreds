@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go/service/kms"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
-	"github.com/versent/unicreds/mocks"
 )
 
 var (

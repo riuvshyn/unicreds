@@ -19,10 +19,10 @@ func TestEncode(t *testing.T) {
 	}
 
 	expectedData := map[string]*dynamodb.AttributeValue{
-		"name": &dynamodb.AttributeValue{
+		"name": {
 			S: aws.String("data"),
 		},
-		"timestamp": &dynamodb.AttributeValue{
+		"timestamp": {
 			N: aws.String("1449038525717338459"),
 		},
 	}

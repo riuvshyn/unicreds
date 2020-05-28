@@ -174,9 +174,9 @@ func GetHighestVersionSecret(tableName *string, name string, encContext *Encrypt
 			},
 		},
 		KeyConditionExpression: aws.String("#N = :name"),
-		Limit:            aws.Int64(1),
-		ConsistentRead:   aws.Bool(true),
-		ScanIndexForward: aws.Bool(false), // descending order
+		Limit:                  aws.Int64(1),
+		ConsistentRead:         aws.Bool(true),
+		ScanIndexForward:       aws.Bool(false), // descending order
 	})
 
 	if err != nil {
@@ -241,10 +241,10 @@ func GetHighestVersion(tableName *string, name string) (string, error) {
 			},
 		},
 		KeyConditionExpression: aws.String("#N = :name"),
-		Limit:                aws.Int64(1),
-		ConsistentRead:       aws.Bool(true),
-		ScanIndexForward:     aws.Bool(false), // descending order
-		ProjectionExpression: aws.String("version"),
+		Limit:                  aws.Int64(1),
+		ConsistentRead:         aws.Bool(true),
+		ScanIndexForward:       aws.Bool(false), // descending order
+		ProjectionExpression:   aws.String("version"),
 	})
 
 	if err != nil {
