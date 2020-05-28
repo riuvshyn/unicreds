@@ -159,7 +159,7 @@ go get github.com/smartystreets/scantest
 # testing
 You can run unit tests which mock out the KMS and DynamoDB backend using `make test`.
 
-There is an integration test you can run using `make integration`. You must set the `AWS_REGION` (default `us-west-2`), `UNICREDS_KEY_ALIAS` (default `alias/unicreds`), and `UNICREDS_TABLE_NAME` (default `credential-store`) environment variables to point to valid AWS resources.
+There is an integration test you can run using `make integration`. You must set the `AWS_REGION` (default `eu-central-1`), `AWS_PROFILE` (default `default`), `UNICREDS_KEY_ALIAS` (default `alias/credstash`), and `UNICREDS_TABLE_NAME` (default `credential-store`) environment variables to point to valid AWS resources.
 
 # auto-versioning
 

@@ -1,5 +1,3 @@
-// +build integration
-
 package integration
 
 import (
@@ -25,18 +23,22 @@ func TestIntegrationGetSecret(t *testing.T) {
 	var err error
 	region := os.Getenv("AWS_REGION")
 	if region == "" {
-		region = "us-west-2"
+		region = "eu-central-1"
+	}
+	profile := os.Getenv("AWS_PROFILE")
+	if region == "" {
+		region = "default"
 	}
 	alias := os.Getenv("UNICREDS_KEY_ALIAS")
 	if alias == "" {
-		alias = "alias/unicreds"
+		alias = "alias/credstash"
 	}
 	tableName := os.Getenv("UNICREDS_TABLE_NAME")
 	if tableName == "" {
 		tableName = "credential-store"
 	}
 
-	unicreds.SetAwsConfig(aws.String(region), nil)
+	unicreds.SetAwsConfig(aws.String(region), aws.String(profile), aws.String(""))
 
 	encContext := unicreds.NewEncryptionContextValue()
 
@@ -67,7 +69,7 @@ func TestIntegrationGetSecret(t *testing.T) {
 		assert.Equal(t, cred.Version, unicreds.PaddedInt(i))
 	}
 
-	creds, err := unicreds.GetAllSecrets(aws.String(tableName), true)
+	creds, err := unicreds.GetAllSecrets(aws.String(tableName), true, encContext)
 	assert.Nil(t, err)
 	assert.Len(t, creds, 15)
 
