@@ -12,6 +12,7 @@ import (
 	"github.com/apex/log/handlers/cli"
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/stretchr/testify/assert"
+	"unicreds"
 )
 
 func init() {

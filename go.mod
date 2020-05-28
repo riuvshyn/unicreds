@@ -12,7 +12,6 @@ require (
 	github.com/mattn/go-runewidth v0.0.9 // indirect
 	github.com/olekukonko/tablewriter v0.0.4
 	github.com/pmezard/go-difflib v1.0.0 // indirect
-	github.com/riuvshyn/unicreds v1.7.1
 	github.com/smartystreets/goconvey v1.6.4 // indirect
 	github.com/stretchr/objx v0.1.0 // indirect
 	github.com/stretchr/testify v1.5.1

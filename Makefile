@@ -1,6 +1,6 @@
 NAME=unicreds
 ARCH=$(shell uname -m)
-VERSION=1.7.0
+VERSION=v1.7.1
 GO15VENDOREXPERIMENT := 1
 ITERATION := 1
 
@@ -19,9 +19,6 @@ compile:
 	-output "build/{{.Dir}}_$(VERSION)_{{.OS}}_{{.Arch}}/$(NAME)" \
 	./...
 
-install:
-	go install ./cmd/unicreds
-
 dist: compile
 	$(eval FILES := $(shell ls build))
 	@rm -rf dist && mkdir dist
@@ -36,19 +33,13 @@ release: dist
 	comparison="$$latest_tag..HEAD"; \
 	if [ -z "$$latest_tag" ]; then comparison=""; fi; \
 	changelog=$$(git log $$comparison --oneline --no-merges --reverse); \
-	$(GOPATH)/bin/github-release versent/$(NAME) $(VERSION) "$$(git rev-parse --abbrev-ref HEAD)" "**Changelog**<br/>$$changelog" 'dist/*'; \
+	$(GOPATH)/bin/github-release riuvshyn/$(NAME) $(VERSION) "$$(git rev-parse --abbrev-ref HEAD)" "**Changelog**<br/>$$changelog" 'dist/*'; \
 	git pull
 
 deps:
 	go get -u github.com/c4milo/github-release
 	go get -u github.com/mitchellh/gox
-	go get -u github.com/golang/dep/cmd/dep
 
-updatedeps:
-	dep ensure
-
-watch:
-	scantest
 
 packages:
 	rm -rf package && mkdir package
@@ -58,7 +49,7 @@ packages:
 	fpm --name $(NAME) -a x86_64 -t deb -s dir --version $(VERSION) --iteration $(ITERATION) -C stage -p package/$(NAME)-$(VERSION)_$(ITERATION).deb usr
 
 generate-mocks:
-	mockery -dir ../../aws/aws-sdk-go/service/kms/kmsiface --all
-	mockery -dir ../../aws/aws-sdk-go/service/dynamodb/dynamodbiface --all
+	mockery -dir vendor/github.com/aws/aws-sdk-go/service/kms/kmsiface --all
+	mockery -dir vendor/github.com/aws/aws-sdk-go/service/dynamodb/dynamodbiface --all
 
-.PHONY: build fmt test install integration watch release packages
+.PHONY: build fmt test install integration release packages

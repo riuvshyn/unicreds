@@ -2,6 +2,7 @@ package unicreds
 
 import (
 	"testing"
+	"unicreds/mocks"
 
 	"github.com/apex/log"
 	"github.com/apex/log/handlers/cli"

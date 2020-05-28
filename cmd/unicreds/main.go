@@ -12,7 +12,7 @@ import (
 	"github.com/apex/log/handlers/json"
 
 	"github.com/alecthomas/kingpin"
-	"github.com/riuvshyn/unicreds"
+	"unicreds"
 )
 
 var (
